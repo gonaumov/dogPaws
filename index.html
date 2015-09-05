@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>jQuery - Dog paws across screen example from Georgi Naumov</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <style type="text/css">
+        .pawImage {
+            width: 70px;
+        }
+
+        #firstPaw {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        #secondPaw {
+            position: absolute;
+            bottom: 0;
+            right: 70px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var firstStep = (function () {
+                var defer = $.Deferred();
+
+                $('#firstPaw').animate({top: "70%", right: "10%"}, 1000, function () {
+                    $('#secondPaw').animate({top: "70%", right: "30%"}, 1000, function () {
+
+                        defer.resolve();
+                    });
+                });
+
+                return defer.promise();
+            })();
+
+            var secondStep = (function () {
+                var defer = $.Deferred();
+
+                firstStep.done(function () {
+                    $('#firstPaw').animate({top: "50%", right: "30%"}, 1000, function () {
+                        $('#secondPaw').animate({top: "50%", right: "50%"}, 1000, function () {
+                            defer.resolve();
+                        });
+                    });
+                });
+
+                return defer.promise();
+            })();
+
+            var thirdStep = (function () {
+                var defer = $.Deferred();
+
+                secondStep.done(function () {
+                    $('#firstPaw').animate({top: "30%", right: "40%"}, 1000, function () {
+                        $('#secondPaw').animate({top: "30%", right: "60%"}, 1000, function () {
+                            defer.resolve();
+                        });
+                    });
+                });
+
+                return defer.promise();
+            })();
+
+            var fourthStep = (function () {
+                var defer = $.Deferred();
+
+                thirdStep.done(function () {
+                    $('#firstPaw').animate({top: "10%", right: "60%"}, 1000, function () {
+                        $('#secondPaw').animate({top: "10%", right: "80%"}, 1000, function () {
+                            defer.resolve();
+                        });
+                    });
+                });
+
+                return defer.promise();
+            })();
+        });
+    </script>
+</head>
+<body>
+<img id="firstPaw" class="pawImage" src="paw.svg"/>
+<img id="secondPaw" class="pawImage" src="paw.svg"/>
+</body>
+</html>
