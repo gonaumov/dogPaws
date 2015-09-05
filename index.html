@@ -7,22 +7,21 @@
     <style type="text/css">
         .pawImage {
             width: 70px;
+            position: absolute;
         }
 
         #firstPaw {
-            position: absolute;
-            bottom: 0;
-            right: 0;
+            top: 90%;
+            right: 0%;
         }
 
         #secondPaw {
-            position: absolute;
-            bottom: 0;
+            top: 90%;
             right: 70px;
         }
     </style>
     <script>
-        $(document).ready(function () {
+        $(window).load(function () {
             var firstStep = (function () {
                 var defer = $.Deferred();
 
